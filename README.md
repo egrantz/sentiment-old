@@ -225,6 +225,8 @@ Now that you've calculated sentiments of tweets, we can start writing programs t
 
 Implement a function **`hashtag_sentiments()`** that takes as parameters the name of a tweet data file and the name of a sentiment data file. This function should _return_ a `list` of tuples, where each tuple contains (in order) a hashtag in the data set and the sentiment of that hashtag, defined as: _the **average** sentiment of the tweets that contain that hashtag_. This list itself should be **ordered** by the sentiment, so that most positive hashtags are at the top.
 
+- Calculating average on the go can be tricky, since you don't know how many tweets contain that hashtag ahead of time! Try to keep track of both the accumulated score and the number of tweets in a single loop; do not process the entire tweet file twice!
+
 In addition, your function should take an [optional](http://www.diveintopython.net/power_of_introspection/optional_arguments.html) third parameter called **`query`**, representing a "search term". If the function is called with this parameter, then the returned list should _only_ contain hashtags that have the parameter's value _`in`_ them (e.g., if the query is `dog` then `dog` and `doggy` would both be returned).
 
 - As always, be sure and call previously defined functions where-ever you can instead of re-writing code!
@@ -242,8 +244,8 @@ which should produce a filtered set of hashtags:
 ```
 #BulldogsAreBeautiful : 8.0
 #doggydaycare : 2.0
-#dog : 2.0
-#DogCollar : 0
+#dog : 0.4
+#DogCollar : 0.0
 ```
 - It's fun to run this function with different sentiment files and see how there can be a range in what is considered a "positive" hashtag!
 
