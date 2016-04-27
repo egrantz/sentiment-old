@@ -1,12 +1,18 @@
 # Your functions go here!
+import re
+listy = []
+def extract_words(words):
 
+  words = re.split("[^\w']+", words)
+  for word in words:
+    if word != '':
+      listy.append(word)
+  return(listy)
 
-
-
-
-
-
-
+# def load_sentiment():
+#   getdict = input('Enter file name here: ')
+#   open(getdict)
+#   return
 
 
 
