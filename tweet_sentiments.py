@@ -2,21 +2,52 @@
 import re
 listy = []
 def extract_words(words):
-
   words = re.split("[^\w']+", words)
   for word in words:
     if word != '':
       listy.append(word)
-  return(listy)
-
-# def load_sentiment():
-#   getdict = input('Enter file name here: ')
-#   open(getdict)
-#   return
+  return listy
 
 
+def load_sentiments(file):
+  dictsentiment = {}
+  openfile = open(file)
+  for row in openfile:
+    row = row.strip().split(',')
+    dictsentiment[row[0]] = row[1]
+  return dictsentiment
 
 
+def text_sentiment(texty, dictionarrio): 
+  sentiment_val = 0
+  words = extract_words(texty)
+  for word in words:
+    if word in dictionarrio:
+      sentiment_val = sentiment_val + int(dictionarrio[word])
+  return sentiment_val 
+
+import json
+
+
+
+def load_tweets(file): 
+  tweets = open(file) 
+  tweetslist = list()
+  for line in tweets: 
+    dictionary = json.loads(line)
+     created_at = data["created_at"]
+     user.screen_name: data.["user.screen_name"] invalid syntax @:
+     user["screen_name"] = dictionary["user["screen_name"]"]
+    dictionary = {
+      "created_at": dictionary.get("created_at"), 
+      "user.screen_name": dictionary.get("user.screen_name"),
+      "text": dictionary.get("text"), 
+      "entities.hashtags[i].text": dictionary.get("entities.hashtags[i].text"),
+      "retweet_count": dictionary.get("retweet_count"),
+      "favorite_count": dictionary.get("favorite_count")
+      }
+    tweets.append(dictionary) 
+  return tweetslist
 
 ####################################
 ## DO NOT EDIT BELOW THIS POINT!! ##
