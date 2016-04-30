@@ -1,43 +1,53 @@
 # Your functions go here!
-import re
-listy = []
+#part 1a
+import re #import regex
+listy = [] #create an empty list
 def extract_words(words):
   words = re.split("[^\w']+", words)
   for word in words:
     if word != '':
-      listy.append(word)
-  return listy
+      listy.append(word) #adds words that are not punctuation, empty space, to list
+  return listy #returns a list of all words, stripped of the punctuation between letters and empty spces between letters
 
-
-def load_sentiments(file):
-  dictsentiment = {}
-  openfile = open(file)
+#part 1b
+def load_sentiments(file): #created a function with parameter: file
+  dictsentiment = {} #created an empty dictionary
+  openfile = open(file) #open the file typed in on the command line level, assign it to variable openfile
   for row in openfile:
-    row = row.strip().split(',')
-    dictsentiment[row[0]] = row[1]
-  return dictsentiment
+    row = row.strip().split(',') #.strip removes leading and trailing white space, .split splits the row at the comma, turns row into a tuple consisting of: the part before the comma, the comma, and the part after the comma
+    dictsentiment[row[0]] = row[1] #inserts results of this for loop, into the previously empty dictionary
+  return dictsentiment #returns the dictionary, now not empty
 
-
-def text_sentiment(texty, dictionarrio): 
+#part 1c
+#creating a function that takes in a text to analyze, and a dictionary to analyze it with, as parameters
+def text_sentiment(texty, dictionarrio):
+  #the sentiment value should default to 0, if it is not in the dictionary, thus set default value to 0
   sentiment_val = 0
+  #create a variable that takes the value of the text string, that has been run through the extract_words fn
   words = extract_words(texty)
   for word in words:
+    #if loop, that takes sentiment value of words in dictionary and adds them together for the whole string
     if word in dictionarrio:
       sentiment_val = sentiment_val + int(dictionarrio[word])
-  return sentiment_val 
+  return sentiment_val #returns sentiment value of whole string 
 
+#part 2a
 import json
-
-
-
-def load_tweets(file): 
+#create load_tweets function, taking the parameter of file
+def load_tweets(file):
+  #create variable, fill it with value of the file input on the command line
   tweets = open(file) 
+  #creating an empty list for future tweets to be put in
   tweetslist = list()
-  for line in tweets: 
+  #for each line in the opened file
+  for line in tweets:
+    #loads each line from the tweets file, and parses it using json
     dictionary = json.loads(line)
-     created_at = data["created_at"]
-     user.screen_name: data.["user.screen_name"] invalid syntax @:
-     user["screen_name"] = dictionary["user["screen_name"]"]
+    #turns the above variable into a dictionary
+    dictionary = {dictionary}
+    #creates a variable that pulls the data within the dictionary, associated with the key "created_at"
+    created_at = data["created_at"] 
+    #creates a variable called dictionary, that is a dictionary, pulling the below fields from the tweets file
     dictionary = {
       "created_at": dictionary.get("created_at"), 
       "user.screen_name": dictionary.get("user.screen_name"),
@@ -46,8 +56,11 @@ def load_tweets(file):
       "retweet_count": dictionary.get("retweet_count"),
       "favorite_count": dictionary.get("favorite_count")
       }
-    tweets.append(dictionary) 
+    #adds dictionary of tweets, to inside the tweetslist
+    tweetslist.append(dictionary)
+  #returns list, with dictionary inside
   return tweetslist
+
 
 ####################################
 ## DO NOT EDIT BELOW THIS POINT!! ##
